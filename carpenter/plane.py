@@ -1,13 +1,15 @@
 import subprocess
 import re
 import sys
+import os
 
 
 class Plane(object):
     def __init__(self, **options):
         self.lang = options.get('lang', 'eng')
+        self.config_path = options.get('config_path')
         self.config = options.get('config')
-        self.auto_numbers = options.get('auto_numbers')
+        self.smart_numbers = options.get('smart_numbers')
 
     def call_tesseract(self, cell, config=None):
         params = ["tesseract", cell.filename,
@@ -24,8 +26,9 @@ class Plane(object):
 
     def ocr_cell(self, cell):
         text = self.call_tesseract(cell, self.config)
-        if self.auto_numbers and self.likely_number(text):
-            text = self.call_tesseract(cell, 'numbers')
+        if self.smart_numbers and self.likely_number(text):
+            number_config = os.path.join(self.config_path, 'numbers')
+            text = self.call_tesseract(cell, number_config)
         cell.text = text
 
     def likely_number(self, text):
