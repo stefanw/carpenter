@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}
+<div class="hero-unit">
+  <div class="row-fluid">
+    <div class="span4">
+      <h1>Carpenter</h1>
+      <p>Create tables from raw material.</p>
+    </div>
+    <div class="span4">
+      <h4>Take a picture of a table...</h4>
+      <div class="frame">
+        <img src="{{ url_for('static', filename='img/table.png') }}" alt="Carpenter table">
+      </div>
+    </div>
+    <div class="span4">
+      <h4>...and turn it into an actual table.</h4>
+      <table class="table table-bordered">
+        <tr>
+          <td>lorem</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>sit amet</td>
+        </tr>
+        <tr>
+          <td>2011</td>
+          <td>2012</td>
+          <td>2013</td>
+          <td>2014</td>
+        </tr>
+        <tr>
+          <td>2011</td>
+          <td>2012</td>
+          <td>2013</td>
+          <td>2014</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row-fluid row-margin">
+    <div class="span4">
+      <h3>Create new Project</h3>
+      <form action="{{ url_for('project_create') }}" method="post" class="form-inline">
+        <input type="text" name="name" placeholder="Project name"/>
+        <button type="submit" class="btn">Create Project</button>
+      </form>
+    </div>
+    <div class="span4">
+<h3>Existing Projects</h3>
+<ul>
+  {% for project in projects %}
+    <li>
+      <a href="{{ url_for('project', project_id=project.id) }}">{{ project.name }}</a>
+    </li>
+  {% else %}
+    <li>No projects yet. Create one!</li>
+  {% endfor %}
+</ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}

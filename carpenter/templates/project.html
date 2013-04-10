@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row-fluid">
+  <div class="span6">
+    <h1>{{ project.name }}</h1>
+    <select id="project-file">
+      {% for file in project.files %}
+        <option value="{{ file.id }}">{{ file.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="span6">
+    <form action="{{ url_for('project_upload') }}" method="post" enctype="multipart/form-data">
+      <label>Name: <input type="text" name="name"/> (defaults to filename)</label>
+      <label>File: <input type="file" name="file"></label>
+      <label>Description: <textarea type="text" name="description"></textarea></label>
+      <input type="hidden" name="project_id" value="{{ project.id }}"/>
+      <button type="submit" class="btn">Upload</button>
+    </form>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span2">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">View</li>
+        <li class="active"><a href="#">Page</a></li>
+        <li><a href="#">Image</a></li>
+        <li><a href="#">Table</a></li>
+      </ul>
+    </div>
+    <div id="tools-container"></div>
+  </div>
+  <div class="span8">
+    <div id="page-container"></div>
+  </div>
+<div id="thumbnail-container" class="span2">
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/lib/underscore.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/lib/backbone.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/carpenter.js') }}"></script>
+  <script>
+    Carpenter.setup(JSON.parse({{ project_json|tojson|safe }}), {
+      'static': '{{ url_for('static', filename='') }}'
+    });
+  </script>
+{% endblock %}
