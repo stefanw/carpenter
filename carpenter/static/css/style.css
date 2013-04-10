@@ -1,0 +1,48 @@
+.navbar-inner {
+  background: transparent;
+  color: #fff;
+  border-width: 0 !important;
+}
+
+.navbar a {
+  text-shadow: none !important;
+  color: #ccc !important;
+}
+
+body {
+  background: url('../img/dark_wood.png') repeat;
+  color: #fff;
+}
+
+.container-fluid {
+  /*background-color: rgba(255,255,255,0.7);*/
+}
+
+.hero-unit {
+  background: none;
+  color: #fff;
+}
+
+.row-margin {
+  margin-top: 5em;
+}
+
+.post-navbar {
+  padding-top: 20px;
+}
+
+#thumbnail-container {
+  overflow: auto;
+  height: 500px;
+}
+
+.frame img {
+    border: 4px solid #EEEEEE;
+    box-shadow: 1px 1px 1px #CCCCCC;
+    -webkit-box-shadow: 1px 1px 1px #CCCCCC;
+    -moz-box-shadow: 1px 1px 1px #CCCCCC;
+    margin: 10px 0 10px 10px;
+    padding: 5px;
+    transform: rotate(-2deg);
+    -webkit-transform: rotate(-5deg);
+}
